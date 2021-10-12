@@ -25,8 +25,6 @@ namespace DIOBank.Classes
             if (VerificarLimite(valorSaque))
             {
                 this.Saldo -= valorSaque;
-                MostraSaldoAtual();
-
             }
 
         }
@@ -34,14 +32,15 @@ namespace DIOBank.Classes
         public void Depositar(double valorDeposito)
         {
             this.Saldo += valorDeposito;
-            MostraSaldoAtual();
         }
 
         public void Transferir(Conta contaDestino, double valorTransferencia)
         {
             if (VerificarLimite(valorTransferencia))
+            {
                 contaDestino.Depositar(valorTransferencia);
-
+                this.Saldo -= valorTransferencia;
+            }
         }
 
         private bool VerificarLimite(double quantia)
